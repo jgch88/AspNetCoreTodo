@@ -1,0 +1,49 @@
+﻿@model TodoViewModel
+
+@*
+.cshtml is like handlebars moustaches, erb in rails. It uses
+the Razor templating language (engine?).
+The View rendered by the Index "action" of the TodoController
+needs to take the data in the View Model (the array of todo items)
+and display it in a nice table (html) for the user
+
+By convention, views are placed in the Views directory, followed
+by a subdirectory corresponding to the controller name (Todo)
+
+the @model directive at the top binds this view to the model specified
+
+The rest of the base html layout is in Views/Shared/_Layout.cshtml
+*@
+
+@{
+    ViewData["Title"] = "Manage your todo list";
+}
+
+<div class="panel panel-default todo-panel">
+    <div class="panel-heading">@ViewData["Title"]</div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <td>&#x2714;</td>
+                <td>Item</td>
+                <td>Due</td>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" class="done-checkbox" />
+                </td>
+                <td>@item.Title</td>
+                <td>@item.DueAt</td>
+            </tr>
+        }
+    </table>
+
+    <div class="panel-footer add-item-form">
+        <!-- TODO: Add item form -->
+    </div>
+</div>
