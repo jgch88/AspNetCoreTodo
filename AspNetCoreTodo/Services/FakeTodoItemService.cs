@@ -27,5 +27,17 @@ namespace AspNetCoreTodo.Services
             // Remember, Task<> is a "promise", this is like Promise.resolve(items);
             return Task.FromResult(new[] { item1, item2 });
         }
+
+        public async Task<bool> AddItemAsync(TodoItem newItem)
+        {
+            // because dotnet wouldn't compile FakeTodoItemService and I didn't want to delete 
+            // this class.
+            return await Task.FromResult(false);
+        }
+
+        public async Task<bool> MarkDoneAsync(Guid id)
+        {
+            return await Task.FromResult(false);
+        }
     }
 }

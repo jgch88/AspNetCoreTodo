@@ -12,6 +12,8 @@ namespace AspNetCoreTodo.Models
 
         public bool IsDone { get; set; }
 
+        // This [Required] tag is used by the model validator to determine
+        // if ModelState.IsValid
         [Required]
         public string Title { get; set; }
 

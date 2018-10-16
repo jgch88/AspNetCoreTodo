@@ -1,0 +1,16 @@
+﻿@model TodoItem
+
+<!-- asp-action tag helper generates URL e.g. /Todo/Additem as well as CSRF token -->
+<!-- the model 'directive' (can't use the symbol at or compiler complains) above TodoItem 
+    lets ASP.NET's "Model binding" know that asp-for="Title" below is paired with the Title property.
+
+    Any model properties that can't be matched up with fields in the request are ignored.
+    => This implies that IsDone, DueAt on the TodoItem will be empty or contain defaults.
+
+    After model binding, model validation is performed.
+-->
+<form asp-action="AddItem" method="POST">
+    <label asp-for="Title">Add a new item:</label>
+    <input asp-for="Title" />
+    <button type="submit">Add</button>
+</form>

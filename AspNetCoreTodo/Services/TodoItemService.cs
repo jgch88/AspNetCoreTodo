@@ -30,5 +30,33 @@ namespace AspNetCoreTodo.Services
                 .Where(x => x.IsDone == false) // this is like js syntax
                 .ToArrayAsync();
         }
+
+        public async Task<bool> AddItemAsync(TodoItem newItem)
+        {
+            // the remaining newItem properties except "Title"
+            newItem.Id = Guid.NewGuid();
+            newItem.IsDone = false;
+            newItem.DueAt = DateTimeOffset.Now.AddDays(3);
+
+            _context.Items.Add(newItem);
+
+            // probably an inherited DB method
+            var saveResult = await _context.SaveChangesAsync();
+            return saveResult == 1;
+        }
+
+        public async Task<bool> MarkDoneAsync(Guid id)
+        {
+            var item = await _context.Items
+                .Where(x => x.Id == id)
+                .SingleOrDefaultAsync(); // .SingleOrDefaultAsync() will either return the item or null
+
+            if (item == null) return false;
+
+            item.IsDone = true;
+
+            var saveResult = await _context.SaveChangesAsync();
+            return saveResult == 1; // One entity should have been updated
+        }
     }
 }

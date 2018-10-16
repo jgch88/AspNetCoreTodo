@@ -36,7 +36,10 @@ The rest of the base html layout is in Views/Shared/_Layout.cshtml
         {
             <tr>
                 <td>
-                    <input type="checkbox" class="done-checkbox" />
+                    <form asp-action="MarkDone" method="POST">
+                        <input type="checkbox" class="done-checkbox" />
+                        <input type="hidden" name="id" value="@item.Id" />
+                    </form>
                 </td>
                 <td>@item.Title</td>
                 <td>@item.DueAt.Humanize()</td>
@@ -45,6 +48,6 @@ The rest of the base html layout is in Views/Shared/_Layout.cshtml
     </table>
 
     <div class="panel-footer add-item-form">
-        <!-- TODO: Add item form -->
+        @await Html.PartialAsync("AdditemPartial", new TodoItem())
     </div>
 </div>

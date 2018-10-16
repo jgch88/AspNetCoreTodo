@@ -14,5 +14,9 @@ namespace AspNetCoreTodo.Services
         // TodoItem reference requires the View Model reference above
         Task<TodoItem[]> GetIncompleteItemsAsync();
         // Task type is similar to a promise
+
+        Task<bool> AddItemAsync(TodoItem newItem);
+
+        Task<bool> MarkDoneAsync(Guid id);
     }
 }
