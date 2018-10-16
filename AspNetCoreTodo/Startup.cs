@@ -45,7 +45,13 @@ namespace AspNetCoreTodo
 
             // dependency injection
             // remember to add the services namespace above!
-            services.AddSingleton<ITodoItemService, FakeTodoItemService>();
+            // services.AddSingleton<ITodoItemService, FakeTodoItemService>(); // removed after adding EntityFrameworkCore
+
+            // AddScoped adds service using the "scoped" lifecycle, meaning a new instance of
+            // TodoItemService will be created during EACH web request. Using singleton (or other)
+            // lifecycles will cause problems because of how EFC manages database connections
+            // per request under the hood.
+            services.AddScoped<ITodoItemService, TodoItemService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
