@@ -1,4 +1,5 @@
 ﻿@model TodoViewModel
+@using Humanizer
 
 @*
 .cshtml is like handlebars moustaches, erb in rails. It uses
@@ -38,7 +39,7 @@ The rest of the base html layout is in Views/Shared/_Layout.cshtml
                     <input type="checkbox" class="done-checkbox" />
                 </td>
                 <td>@item.Title</td>
-                <td>@item.DueAt</td>
+                <td>@item.DueAt.Humanize()</td>
             </tr>
         }
     </table>
