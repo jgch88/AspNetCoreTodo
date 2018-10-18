@@ -39,10 +39,20 @@ namespace AspNetCoreTodo
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>()
-                // (No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole]' has been registered.)
-                .AddRoles<IdentityRole>() 
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            // Backhage's partially working solution (the UserManager works and shows the partial view
+            // at the navbar, but can't actually go into the Manage Users page)
+            // https://github.com/nbarbettini/little-aspnetcore-book/issues/65
+
+            //services.AddDefaultIdentity<IdentityUser>()
+            // (No service for type 'Microsoft.AspNetCore.Identity.RoleManager`1[Microsoft.AspNetCore.Identity.IdentityRole]' has been registered.)
+            //.AddRoles<IdentityRole>() 
+            //.AddEntityFrameworkStores<ApplicationDbContext>();
+
+            // RoBak42's solution to [Authorize(Roles = "Administrator")]
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI()
+                .AddDefaultTokenProviders();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
