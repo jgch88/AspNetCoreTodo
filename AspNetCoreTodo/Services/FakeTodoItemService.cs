@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AspNetCoreTodo.Models;
+using Microsoft.AspNetCore.Identity;
 
 // The actual class code for the interface
 namespace AspNetCoreTodo.Services
@@ -9,7 +10,7 @@ namespace AspNetCoreTodo.Services
     // Like "implements" in Java
     public class FakeTodoItemService : ITodoItemService
     {
-        public Task<TodoItem[]> GetIncompleteItemsAsync()
+        public Task<TodoItem[]> GetIncompleteItemsAsync(IdentityUser user)
         {
             // TodoItem is the Model, I guess this is the constructor
             var item1 = new TodoItem
@@ -28,14 +29,14 @@ namespace AspNetCoreTodo.Services
             return Task.FromResult(new[] { item1, item2 });
         }
 
-        public async Task<bool> AddItemAsync(TodoItem newItem)
+        public async Task<bool> AddItemAsync(TodoItem newItem, IdentityUser user)
         {
             // because dotnet wouldn't compile FakeTodoItemService and I didn't want to delete 
             // this class.
             return await Task.FromResult(false);
         }
 
-        public async Task<bool> MarkDoneAsync(Guid id)
+        public async Task<bool> MarkDoneAsync(Guid id, IdentityUser user)
         {
             return await Task.FromResult(false);
         }

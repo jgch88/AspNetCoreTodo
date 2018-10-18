@@ -10,6 +10,9 @@ namespace AspNetCoreTodo.Models
         public Guid Id { get; set; }
         // guid: globally unique identifier
 
+        // store which user the TodoItem belongs to
+        public string UserId { get; set; }
+
         public bool IsDone { get; set; }
 
         // This [Required] tag is used by the model validator to determine
