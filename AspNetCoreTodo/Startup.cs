@@ -36,7 +36,7 @@ namespace AspNetCoreTodo
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
+                options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
             // Backhage's partially working solution (the UserManager works and shows the partial view
